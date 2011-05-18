@@ -1,0 +1,5 @@
+<ul>
+{% for entry in entries %}
+<li><a href='{{ entry.get_absolute_url }}'>{{ entry.title }}</a> - {{ entry.published }} </li>
+{% endfor %}
+</ul>
