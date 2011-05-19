@@ -1,13 +1,10 @@
 """
+Django Hermes | blog.views
+Last Update: 05/19/2011
+
 EntryDetailView - Displays entry's details.
 EntryListView - Displays the most recent entries.
 EntryArchiveListView - Displays a list of entries based on given date.
-
-Django Hermes | blog.views
-05/18/2011
-
-Author: Chris Pickett
-https://github.com/bunchesofdonald/django-hermes/
 """
 
 from django.shortcuts import get_object_or_404
@@ -29,9 +26,9 @@ class EntryDetailView(DetailView):
 
 	def get_object(self):
 		filter = {
-			'published__year': self.kwargs['year'],
-			'published__month': self.kwargs['month'],
-			'published__day': self.kwargs['day'],
+			'pub_date__year': self.kwargs['year'],
+			'pub_date__month': self.kwargs['month'],
+			'pub_date__day': self.kwargs['day'],
 			'slug': self.kwargs['slug']
 		}
 
@@ -48,17 +45,22 @@ class EntryListView(ListView):
 	template_name = 'hermes-blog/entry_list.html'
 	context_object_name = 'entries'
 	paginate_by = entries_per_page
+	order_by = '-pub_date'
 
 	def get_queryset(self):
-		return Entry.objects.all().order_by('-published')
+		return Entry.objects.get_published_entries().order_by(self.order_by)
 
 class EntryArchiveListView(EntryListView):
 	""" Displays all entries for the given date. """
 
 	def get_queryset(self):
+		queryset = None
+
 		if 'day' in self.kwargs:
-			return Entry.objects.get_for_day(self.kwargs['day'], self.kwargs['month'], self.kwargs['year'])
+			queryset = Entry.objects.get_for_day(self.kwargs['day'], self.kwargs['month'], self.kwargs['year'])
 		if 'month' in self.kwargs:
-			return Entry.objects.get_for_month(self.kwargs['month'], self.kwargs['year'])
+			queryset = Entry.objects.get_for_month(self.kwargs['month'], self.kwargs['year'])
 		else:
-			return Entry.objects.get_for_year(self.kwargs['year'])
+			queryset =  Entry.objects.get_for_year(self.kwargs['year'])
+
+		return queryset.order_by(self.order_by)
