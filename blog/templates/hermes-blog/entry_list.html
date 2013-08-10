@@ -1,5 +1,0 @@
-<ul>
-{% for entry in entries %}
-<li><a href='{{ entry.get_absolute_url }}'>{{ entry.title }}</a> - {{ entry.pub_date }}<br><p>{{ entry.teaser_html|safe }}</p></li>
-{% endfor %}
-</ul>
