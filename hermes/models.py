@@ -12,6 +12,17 @@ class TimestampedModel(models.Model):
         abstract = True
 
 
+class Category(models.Model):
+    title = models.CharField(_('title'), max_length=100)
+    parent = models.ForeignKey('self')
+
+    def __unicode__(self):
+        return self.title
+
+    def is_root(self):
+        return self.parent == None
+
+
 class PostQuerySet(models.query.QuerySet):
     def recent(self, limit=None):
         queryset = self.all()
