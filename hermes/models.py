@@ -20,11 +20,52 @@ class Category(models.Model):
         verbose_name = u'category'
         verbose_name_plural = u'categories'
 
+    @property
+    def full_title(self):
+        """
+            Returns a '>' separated list of the current category's parents
+            title + the current category's title.
+        """
+        parents = [category.title for category in self.parents()]
+
+        if parents:
+            return u"{parents} > {title}".format(
+                parents=" > ".join(parents),
+                title=self.title,
+            )
+        else:
+            return self.title
+
     def __unicode__(self):
-        return self.title
+        return self.full_title
+
+    def parents(self):
+        """ Returns a list of all the current category's parents."""
+        parents = []
+
+        if self.parent == None:
+            return []
+
+        category = self
+        while category.parent != None:
+            parents.append(category.parent)
+            category = category.parent
+
+        return parents
 
     def is_root(self):
+        """ Returns True if this category has no parent. """
         return self.parent == None
+
+    def root_parent(self, category=None):
+        """ Gets the topmost parent of the current category. """
+        if not category:
+            category = self
+
+        if category.is_root():
+            return category
+        else:
+            return self.root_parent(category.parent)
 
 
 class PostQuerySet(models.query.QuerySet):
