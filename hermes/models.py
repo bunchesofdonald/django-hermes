@@ -16,6 +16,10 @@ class Category(models.Model):
     title = models.CharField(_('title'), max_length=100)
     parent = models.ForeignKey('self', blank=True, null=True)
 
+    class Meta:
+        verbose_name = u'category'
+        verbose_name_plural = u'categories'
+
     def __unicode__(self):
         return self.title
 
