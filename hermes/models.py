@@ -48,6 +48,8 @@ class Post(TimestampedModel):
     slug = models.SlugField(_('slug'), max_length=100)
     summary = models.TextField(_('summary'), blank=True, null=True)
     body = models.TextField(_('body'))
+
+    category = models.ForeignKey(Category)
     author = models.ForeignKey(User)
 
     objects = PostManager()
