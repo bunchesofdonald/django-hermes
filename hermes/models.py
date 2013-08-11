@@ -1,3 +1,5 @@
+import os
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext as _
@@ -88,7 +90,17 @@ class PostManager(models.Manager):
             return getattr(self.get_query_set(), attr, *args)
 
 
+def post_hero_upload_to(instance, filename):
+    extension = os.path.splitext(filename)[1][1:]
+
+    return "hermes/heroes/{slug}_hero.{extension}".format(
+        slug=instance.slug,
+        extension=extension
+    )
+
+
 class Post(TimestampedModel):
+    hero = models.ImageField(_('hero'), upload_to=post_hero_upload_to)
     subject = models.CharField(_('subject'), max_length=100)
     slug = models.SlugField(_('slug'), max_length=100)
     summary = models.TextField(_('summary'), blank=True, null=True)
