@@ -14,7 +14,7 @@ class TimestampedModel(models.Model):
 
 class Category(models.Model):
     title = models.CharField(_('title'), max_length=100)
-    parent = models.ForeignKey('self')
+    parent = models.ForeignKey('self', blank=True, null=True)
 
     def __unicode__(self):
         return self.title
