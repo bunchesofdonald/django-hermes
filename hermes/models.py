@@ -78,6 +78,13 @@ class PostQuerySet(models.query.QuerySet):
 
         return queryset
 
+    def random(self, limit=None):
+        queryset = self.recent().order_by('?')
+        if limit:
+            queryset = queryset[:limit]
+
+        return queryset
+
 
 class PostManager(models.Manager):
     def get_query_set(self):
