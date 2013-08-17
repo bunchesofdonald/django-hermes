@@ -1,9 +1,0 @@
-This is yet another blog application for Django. I originally built it a couple
-years ago as a learning experience of attempting to put together a 3rd-party
-app for Django. I had intended to use it on my personal site, but I got
-side-tracked with other things and ended up using Posterous, which is now
-defunct.
-
-This is the complete re-build. It's a very basic blog app. It's main intention
-is to be simple to use and specifically fit my needs, but if it works for you
-as well, that's great!
