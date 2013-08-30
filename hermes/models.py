@@ -3,7 +3,7 @@ import os
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext as _
-from django.utils.text import Truncator
+from django.utils.text import Truncator, slugify
 
 
 class TimestampedModel(models.Model):
@@ -17,6 +17,7 @@ class TimestampedModel(models.Model):
 class Category(models.Model):
     title = models.CharField(_('title'), max_length=100)
     parent = models.ForeignKey('self', blank=True, null=True)
+    slug = models.SlugField()
 
     class Meta:
         verbose_name = u'category'
@@ -40,6 +41,11 @@ class Category(models.Model):
 
     def __unicode__(self):
         return self.full_title
+
+    def _generate_slug(self):
+        return "/".join(
+            [slugify(parent.title) for parent in self.parents()] + [slugify(self.title)]
+        ).lower()
 
     def parents(self):
         """ Returns a list of all the current category's parents."""
