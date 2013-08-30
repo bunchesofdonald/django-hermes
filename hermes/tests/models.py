@@ -25,6 +25,11 @@ class CategoryTestCase(TestCase):
             self.root_category, self.second_category, self.third_category]
         )
 
+    def test_parents(self):
+        self.assertEqual(self.root_category.parents(), [])
+        self.assertEqual(self.second_category.parents(), [self.root_category])
+        self.assertEqual(self.third_category.parents(), [self.root_category, self.second_category])
+
     def test_generate_slug(self):
         self.assertEqual(self.root_category._generate_slug(), u'programming')
         self.assertEqual(self.second_category._generate_slug(), u'programming/python')
