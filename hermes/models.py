@@ -14,10 +14,29 @@ class TimestampedModel(models.Model):
         abstract = True
 
 
+class CategoryManager(models.Manager):
+    def children_of(self, category, categories=None, acc=None):
+        if acc is None:
+            acc = []
+
+        if categories is None:
+            categories = self.all()
+
+        children = filter(lambda c: c.parent == category, categories)
+        for child in children:
+            acc.extend(self.children_of(child, categories, acc))
+
+        acc.extend(children)
+
+        return acc
+
+
 class Category(models.Model):
     title = models.CharField(_('title'), max_length=100)
     parent = models.ForeignKey('self', blank=True, null=True)
     slug = models.SlugField()
+
+    objects = CategoryManager()
 
     class Meta:
         verbose_name = u'category'
@@ -29,6 +48,12 @@ class Category(models.Model):
 
     def __unicode__(self):
         return " > ".join([category.title for category in self.hierarchy()])
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('hermes_category_post_list', (), {
+            'slug': self.slug,
+        })
 
     def _generate_slug(self):
         return "/".join([slugify(category.title) for category in self.hierarchy()]).lower()
@@ -62,7 +87,10 @@ class Category(models.Model):
 
 class PostQuerySet(models.query.QuerySet):
     def in_category(self, category_slug):
-        return self.filter(category__slug=category_slug)
+        category = Category.objects.get(slug=category_slug)
+        children = Category.objects.children_of(category)
+
+        return self.filter(category__in=[category] + children)
 
     def recent(self, limit=None):
         queryset = self.all()
