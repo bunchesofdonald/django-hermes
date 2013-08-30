@@ -14,6 +14,17 @@ class CategoryTestCase(TestCase):
         self.assertFalse(self.second_category.is_root)
         self.assertFalse(self.third_category.is_root)
 
+    def test_hierarchy(self):
+        self.assertEqual(self.root_category.hierarchy(), [
+            self.root_category
+        ])
+        self.assertEqual(self.second_category.hierarchy(), [
+            self.root_category, self.second_category]
+        )
+        self.assertEqual(self.third_category.hierarchy(), [
+            self.root_category, self.second_category, self.third_category]
+        )
+
     def test_generate_slug(self):
         self.assertEqual(self.root_category._generate_slug(), u'programming')
         self.assertEqual(self.second_category._generate_slug(), u'programming/python')
