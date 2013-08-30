@@ -77,6 +77,9 @@ class Category(models.Model):
 
 
 class PostQuerySet(models.query.QuerySet):
+    def in_category(self, category_slug):
+        return self.filter(category__slug=category_slug)
+
     def recent(self, limit=None):
         queryset = self.all()
         if limit:

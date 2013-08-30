@@ -9,6 +9,12 @@ class PostListView(ListView):
     template_name = 'hermes/post_list.html'
 
 
+class CategoryPostListView(PostListView):
+    def get_queryset(self):
+        category_slug = self.kwargs.get('category_slug', '')
+        return self.model.objects.in_category(category_slug)
+
+
 class ArchivePostListView(PostListView):
     pass
 

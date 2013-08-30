@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 
-from .views import ArchivePostListView, PostListView, PostDetail
+from .views import ArchivePostListView, PostListView, PostDetail, CategoryPostListView
 
 urlpatterns = patterns('',
     url(
@@ -24,6 +24,12 @@ urlpatterns = patterns('',
     url(
         regex=r'^(?P<year>\d+)$',
         view=ArchivePostListView.as_view(),
+        name='hermes_archive_year',
+    ),
+
+    url(
+        regex=r'categories/(?P<category_slug>.+)$',
+        view=CategoryPostListView.as_view(),
         name='hermes_archive_year',
     ),
 
