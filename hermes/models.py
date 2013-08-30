@@ -23,29 +23,20 @@ class Category(models.Model):
         verbose_name = u'category'
         verbose_name_plural = u'categories'
 
-    @property
-    def full_title(self):
-        """
-            Returns a '>' separated list of the current category's parents
-            title + the current category's title.
-        """
-        parents = [category.title for category in self.parents()]
-
-        if parents:
-            return u"{parents} > {title}".format(
-                parents=" > ".join(parents),
-                title=self.title,
-            )
-        else:
-            return self.title
+    def save(self, *args, **kwargs):
+        self.slug = self._generate_slug()
+        super(Category, self).save(*args, **kwargs)
 
     def __unicode__(self):
-        return self.full_title
+        return " > ".join([category.title for category in self.hierarchy()])
 
     def _generate_slug(self):
-        return "/".join(
-            [slugify(parent.title) for parent in self.parents()] + [slugify(self.title)]
-        ).lower()
+        return "/".join([slugify(category.title) for category in self.hierarchy()]).lower()
+
+    @property
+    def is_root(self):
+        """ Returns True if this category has no parent. """
+        return self.parent == None
 
     def parents(self):
         """ Returns a list of all the current category's parents."""
@@ -59,21 +50,14 @@ class Category(models.Model):
             parents.append(category.parent)
             category = category.parent
 
-        return parents
+        return parents[::-1]
 
-    def is_root(self):
-        """ Returns True if this category has no parent. """
-        return self.parent == None
+    def hierarchy(self):
+        return self.parents() + [self]
 
     def root_parent(self, category=None):
-        """ Gets the topmost parent of the current category. """
-        if not category:
-            category = self
-
-        if category.is_root():
-            return category
-        else:
-            return self.root_parent(category.parent)
+        """ Returns the topmost parent of the current category. """
+        return filter(lambda c: c.is_root, self.hierarchy())[0]
 
 
 class PostQuerySet(models.query.QuerySet):
