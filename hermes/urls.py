@@ -22,7 +22,7 @@ urlpatterns = patterns('',
     ),
 
     url(
-        regex=r'^(?P<year>\d+)$',
+        regex=r'^(?P<year>\d+)/$',
         view=ArchivePostListView.as_view(),
         name='hermes_archive_year',
     ),

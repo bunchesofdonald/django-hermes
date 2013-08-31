@@ -16,7 +16,12 @@ class CategoryPostListView(PostListView):
 
 
 class ArchivePostListView(PostListView):
-    pass
+    def get_queryset(self):
+        year = self.kwargs.get('year', None)
+        month = self.kwargs.get('month', None)
+        day = self.kwargs.get('day', None)
+
+        return self.model.objects.created_on(year=year, month=month, day=day)
 
 
 class PostDetail(DetailView):
