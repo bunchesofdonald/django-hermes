@@ -28,7 +28,7 @@ urlpatterns = patterns('',
     ),
 
     url(
-        regex=r'categories/(?P<category_slug>.+)/$',
+        regex=r'categories/(?P<slug>.+)/$',
         view=CategoryPostListView.as_view(),
         name='hermes_category_post_list',
     ),

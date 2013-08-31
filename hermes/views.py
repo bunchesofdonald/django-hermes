@@ -11,7 +11,7 @@ class PostListView(ListView):
 
 class CategoryPostListView(PostListView):
     def get_queryset(self):
-        category_slug = self.kwargs.get('category_slug', '')
+        category_slug = self.kwargs.get('slug', '')
         return self.model.objects.in_category(category_slug)
 
 
