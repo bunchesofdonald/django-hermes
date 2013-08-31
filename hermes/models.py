@@ -1,4 +1,5 @@
 import os
+import operator
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -91,6 +92,20 @@ class PostQuerySet(models.query.QuerySet):
         children = Category.objects.children_of(category)
 
         return self.filter(category__in=[category] + children)
+
+    def created_on(self, year=None, month=None, day=None):
+        clauses = []
+
+        if year:
+            clauses.append(models.Q(created_on__year=year))
+
+        if month:
+            clauses.append(models.Q(created_on__month=month))
+
+        if day:
+            clauses.append(models.Q(created_on__day=day))
+
+        return self.filter(reduce(operator.__and__, clauses))
 
     def recent(self, limit=None):
         queryset = self.all()
