@@ -8,7 +8,8 @@ class PostAdmin(admin.ModelAdmin):
 
 
 class CategoryAdmin(admin.ModelAdmin):
+    include = ('title', 'parent', )
     exclude = ('slug', )
 
 admin.site.register(Post, PostAdmin)
-admin.site.register(Category)
+admin.site.register(Category, CategoryAdmin)

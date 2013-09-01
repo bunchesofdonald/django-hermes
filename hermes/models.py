@@ -35,7 +35,7 @@ class CategoryManager(models.Manager):
 class Category(models.Model):
     title = models.CharField(_('title'), max_length=100)
     parent = models.ForeignKey('self', blank=True, null=True)
-    slug = models.SlugField(blank=True, default='')
+    slug = models.CharField(blank=True, default='', max_length='500')
 
     objects = CategoryManager()
 
