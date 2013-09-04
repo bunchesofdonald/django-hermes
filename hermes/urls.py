@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, url
 
 from .views import ArchivePostListView, PostListView, PostDetail, CategoryPostListView
+from .feeds import LatestPostFeed
 
 urlpatterns = patterns('',
     url(
@@ -37,5 +38,10 @@ urlpatterns = patterns('',
         regex=r'^$',
         view=PostListView.as_view(),
         name='hermes_post_list',
+    ),
+    url(
+        regex=r'^feed/$',
+        view=LatestPostFeed(),
+        name='hermes_post_feed'
     ),
 )
