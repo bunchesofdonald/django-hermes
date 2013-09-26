@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-hermes',
-    version='0.4dev',
+    version='0.5dev',
     author='Chris Pickett',
     author_email='chris.pickett@gmail.com',
     packages=find_packages(),

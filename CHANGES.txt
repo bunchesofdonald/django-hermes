@@ -1,6 +1,9 @@
 v0.1dev, 2013-08-17 -- Initial Release
-v0.2dev, 2013-08-30 -- Adds unit tests for Category model, builds out category
-post list and archive post list views.
-v0.3dev, 2013-08-31 -- Hides slug in Category admin and changes random_posts
-template tag to use random_post_list.html template.
+v0.2dev, 2013-08-30 -- Adds unit tests for Category model, builds out
+    category post list and archive post list views.
+v0.3dev, 2013-08-31 -- Hides slug in Category admin and changes
+    random_posts template tag to use random_post_list.html template.
 v0.4dev, 2013-09-04 -- Creates an atom feed for recent posts.
+v0.5dev, 2013-09-26 -- Adds published & updated dates, author
+    information, and categories to feed output. Defaults feed type to
+    Atom v1.
