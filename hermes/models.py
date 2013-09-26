@@ -62,17 +62,17 @@ class Category(models.Model):
     @property
     def is_root(self):
         """ Returns True if this category has no parent. """
-        return self.parent == None
+        return self.parent is None
 
     def parents(self):
         """ Returns a list of all the current category's parents."""
         parents = []
 
-        if self.parent == None:
+        if self.parent is None:
             return []
 
         category = self
-        while category.parent != None:
+        while category.parent is not None:
             parents.append(category.parent)
             category = category.parent
 
