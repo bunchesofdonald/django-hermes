@@ -41,6 +41,4 @@ Hermes expects two templates:
 TODO
 ====
 1. Create Sphinx Documentation
-2. Create archive view.
-3. Add pagination to PostListView
-4. Create by-category views.
+

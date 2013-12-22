@@ -3,8 +3,10 @@ import operator
 
 from django.contrib.auth.models import User
 from django.db import models
-from django.utils.translation import ugettext as _
 from django.utils.text import Truncator, slugify
+from django.utils.translation import ugettext as _
+
+from . import settings
 
 
 class TimestampedModel(models.Model):
@@ -170,3 +172,10 @@ class Post(TimestampedModel):
             return self.summary
         else:
             return Truncator(self.body).words(30)
+
+    @property
+    def rendered(self):
+        if settings.MARKUP_RENDERER:
+            return settings.MARKUP_RENDERER(self.body)
+        else:
+            return self.body

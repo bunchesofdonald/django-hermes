@@ -1,0 +1,98 @@
+[
+{
+    "pk": 1,
+    "model": "hermes.category",
+    "fields": {
+        "slug": "programming",
+        "parent": null,
+        "title": "Programming"
+    }
+},
+{
+    "pk": 2,
+    "model": "hermes.category",
+    "fields": {
+        "slug": "programming/python",
+        "parent": 1,
+        "title": "Python"
+    }
+},
+{
+    "pk": 3,
+    "model": "hermes.category",
+    "fields": {
+        "slug": "programming/python/django",
+        "parent": 2,
+        "title": "Django"
+    }
+},
+{
+    "pk": 4,
+    "model": "hermes.category",
+    "fields": {
+        "slug": "food",
+        "parent": null,
+        "title": "Food"
+    }
+},
+{
+    "pk": 1,
+    "model": "hermes.post",
+    "fields": {
+        "body": "I've got to find a way to escape the horrible ravages of youth. Suddenly, I'm going to the bathroom like clockwork, every three hours. And those jerks at Social Security stopped sending me checks. Now 'I'' have to pay ''them'! Well I'da done better, but it's plum hard pleading a case while awaiting trial for that there incompetence. She also liked to shut up!",
+        "category": 1,
+        "hero": "hermes/heroes/leela-her-own_hero.jpg",
+        "author": 1,
+        "summary": "",
+        "created_on": "2013-08-10T15:52:44.168Z",
+        "modified_on": "2013-08-11T15:20:15.762Z",
+        "slug": "leela-her-own",
+        "subject": "A Leela of Her Own"
+    }
+},
+{
+    "pk": 2,
+    "model": "hermes.post",
+    "fields": {
+        "body": "Take me to your leader! Yeah, I do that with my stupidness. Yeah, and if you were the pope they'd be all, \"Straighten your pope hat.\" And \"Put on your good vestments.\" We don't have a brig. You're going back for the Countess, aren't you? I'm just glad my fat, ugly mama isn't alive to see this day.",
+        "category": 1,
+        "hero": "hermes/heroes/tale-two-santas_hero.jpeg",
+        "author": 1,
+        "summary": "",
+        "created_on": "2013-08-10T15:55:31.082Z",
+        "modified_on": "2013-08-11T15:20:07.523Z",
+        "slug": "tale-two-santas",
+        "subject": "A Tale of Two Santas"
+    }
+},
+{
+    "pk": 3,
+    "model": "hermes.post",
+    "fields": {
+        "body": "Fry! Stay back! He's too powerful! Spare me your space age technobabble, Attila the Hun! And from now on you're all named Bender Jr. Have you ever tried just turning off the TV, sitting down with your children, and hitting them? That could be 'my' beautiful soul sitting naked on a couch. If I could just learn to play this stupid thing.",
+        "category": 1,
+        "hero": "hermes/heroes/raging-bender_hero.jpg",
+        "author": 1,
+        "summary": "",
+        "created_on": "2013-08-10T15:55:48.832Z",
+        "modified_on": "2013-08-11T15:19:15.059Z",
+        "slug": "raging-bender",
+        "subject": "Raging Bender"
+    }
+},
+{
+    "pk": 4,
+    "model": "hermes.post",
+    "fields": {
+        "body": "Then throw her in the laundry room, which will hereafter be referred to as \"the brig\". And yet you haven't said what I told you to say! How can any of us trust you? Quite possible. We live long and are celebrated poopers. Soothe us with sweet lies.",
+        "category": 4,
+        "hero": "hermes/heroes/series-has-landed_hero.jpg",
+        "author": 1,
+        "summary": "",
+        "created_on": "2013-08-10T15:56:11.384Z",
+        "modified_on": "2013-08-11T15:18:12.633Z",
+        "slug": "series-has-landed",
+        "subject": "The Series Has Landed"
+    }
+}
+]
