@@ -16,20 +16,15 @@ class TimestampedModel(models.Model):
 
 
 class CategoryManager(models.Manager):
-    def children_of(self, category, categories=None, acc=None):
-        if acc is None:
-            acc = []
-
+    def children_of(self, category, categories=None):
         if categories is None:
-            categories = self.all()
+            categories = list(self.all())
 
         children = filter(lambda c: c.parent == category, categories)
         for child in children:
-            acc.extend(self.children_of(child, categories, acc))
+            children.extend(self.children_of(child, categories))
 
-        acc.extend(children)
-
-        return acc
+        return children
 
 
 class Category(models.Model):
