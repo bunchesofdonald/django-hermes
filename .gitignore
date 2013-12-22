@@ -2,3 +2,5 @@
 .DS_Store
 dist
 *.egg-info
+*.sublime-project
+*.sublime-workspace
