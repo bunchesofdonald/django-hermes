@@ -4,7 +4,7 @@ from .models import Post, Category
 
 
 class PostAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("subject", )}
+    prepopulated_fields = {"slug": ("subject", ), }
 
 
 class CategoryAdmin(admin.ModelAdmin):
