@@ -15,10 +15,7 @@ class PostListViewTestCase(HermesTestCase):
 
 class CategoryPostListViewTestCase(HermesTestCase):
     def url(self, category):
-        return super(CategoryPostListViewTestCase, self).url(
-            'hermes_category_post_list',
-            slug=category.slug
-        )
+        return category.get_absolute_url()
 
     def test_context_contains_posts(self):
         """The CategoryPostListView Context should contain a QuerySet of all
@@ -66,3 +63,13 @@ class ArchivePostListViewTestCase(HermesTestCase):
         response = self.get(self.url(year=2012))
         expected = list(models.Post.objects.created_on(year=2012))
         self.assertEqual(expected, list(response.context['posts']))
+
+
+class PostDetailViewTestCase(HermesTestCase):
+    def url(self, post):
+        return post.get_absolute_url()
+
+    def test_context_contains_post(self):
+        response = self.get(self.url(self.post1))
+        expected = self.post1
+        self.assertEqual(expected, response.context['post'])

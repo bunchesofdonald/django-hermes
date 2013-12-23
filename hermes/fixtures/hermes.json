@@ -94,5 +94,23 @@
         "slug": "series-has-landed",
         "subject": "The Series Has Landed"
     }
+},
+{
+    "pk": 1,
+    "model": "auth.user",
+    "fields": {
+        "username": "user",
+        "first_name": "Test",
+        "last_name": "User",
+        "is_active": true,
+        "is_superuser": false,
+        "is_staff": false,
+        "last_login": "2013-10-09T02:39:03.670Z",
+        "groups": [],
+        "user_permissions": [],
+        "password": "pbkdf2_sha256$12000$lxpwgLEsqIWK$HPF0M2vuPrx8lKFop2MCrZrdncRPChaTe1Qfy0dl7Qc=",
+        "email": "test.user@example.com",
+        "date_joined": "2013-08-10T15:35:19Z"
+    }
 }
 ]
