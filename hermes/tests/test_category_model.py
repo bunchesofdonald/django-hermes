@@ -1,5 +1,4 @@
 from . import HermesTestCase
-
 from .. import models
 
 

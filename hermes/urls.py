@@ -3,7 +3,8 @@ from django.conf.urls import patterns, url
 from .views import ArchivePostListView, PostListView, PostDetail, CategoryPostListView
 from .feeds import LatestPostFeed
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(
         regex=r'^(?P<year>\d+)/(?P<month>\d+)/(?P<day>\d+)/(?P<slug>[\w-]+)/$',
         view=PostDetail.as_view(),
