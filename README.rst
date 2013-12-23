@@ -32,10 +32,11 @@ Include hermes.urls in your ROOT_URLCONF::
 
 Create Templates
 ----------------
-Hermes expects two templates:
+Hermes expects three templates:
 
 1. hermes/post_list.html
 2. hermes/post_detail.html
+3. hermes/random_post_list.html
 
 
 TODO

@@ -7,3 +7,4 @@ v0.4dev, 2013-09-04 -- Creates an atom feed for recent posts.
 v0.5dev, 2013-09-26 -- Adds published & updated dates, author
     information, and categories to feed output. Defaults feed type to
     Atom v1.
+v1.0, 2013-12-22 -- Creates full test suite.
