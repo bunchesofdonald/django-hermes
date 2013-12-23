@@ -11,7 +11,7 @@ class HermesTestCase(test.TestCase):
         self.root_category = models.Category.objects.get(slug='programming')
         self.second_category = models.Category.objects.get(slug='programming/python')
         self.third_category = models.Category.objects.get(slug='programming/python/django')
-        self.another_category = models.Category.objects.create(slug=u'food')
+        self.another_category = models.Category.objects.get(slug=u'food')
 
         # Instatiate Posts
         self.post1 = models.Post.objects.get(id=1)

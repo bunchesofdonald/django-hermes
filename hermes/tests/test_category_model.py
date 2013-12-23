@@ -58,6 +58,36 @@ class CategoryTestCase(HermesTestCase):
         expected = u'programming/python/django'
         self.assertEqual(expected, self.third_category._generate_slug())
 
+    def test_unicode(self):
+        """A Category should have a unicode representation"""
+        expected = u'Programming'
+        self.assertEqual(expected, self.root_category.__unicode__())
+
+        expected = u'Programming > Python'
+        self.assertEqual(expected, self.second_category.__unicode__())
+
+        expected = u'Programming > Python > Django'
+        self.assertEqual(expected, self.third_category.__unicode__())
+
+    def test_get_absolute_url(self):
+        """A Category should know its absolute URL"""
+        expected = u'/blog/categories/programming/'
+        self.assertEqual(expected, self.root_category.get_absolute_url())
+
+        expected = u'/blog/categories/programming/python/'
+        self.assertEqual(expected, self.second_category.get_absolute_url())
+
+        expected = u'/blog/categories/food/'
+        self.assertEqual(expected, self.another_category.get_absolute_url())
+
+    def test_save(self):
+        """A Category should update its slug on save"""
+        self.third_category.slug = u"Banana Slug"
+        self.third_category.save()
+
+        expected = u'programming/python/django'
+        self.assertEqual(expected, self.third_category.slug)
+
 
 class CategoryManagerTestCase(HermesTestCase):
     def test_children_of(self):
