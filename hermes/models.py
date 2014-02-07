@@ -45,7 +45,7 @@ class Category(models.Model):
         super(Category, self).save(*args, **kwargs)
 
     def __unicode__(self):
-        return " > ".join([category.title for category in self.hierarchy()])
+        return u" > ".join([category.title for category in self.hierarchy()])
 
     @models.permalink
     def get_absolute_url(self):
