@@ -42,4 +42,6 @@ Hermes expects three templates:
 TODO
 ====
 1. Create Sphinx Documentation
+2. Support tagging
+3. Annotations ala Medium?
 
