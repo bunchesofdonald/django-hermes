@@ -120,7 +120,7 @@ class PostQuerySet(models.query.QuerySet):
 
 
 class PostManager(models.Manager):
-    def get_query_set(self):
+    def get_queryset(self):
         return PostQuerySet(Post)
 
     def __getattr__(self, attr, *args):
@@ -179,3 +179,10 @@ class Post(TimestampedModel):
             return settings.MARKUP_RENDERER(self.body)
         else:
             return self.body
+
+    @property
+    def reading_time(self):
+        time = (self.summary.count(' ') + self.body.count(' ')) / 300
+        if time == 0:
+            time = 1
+        return time

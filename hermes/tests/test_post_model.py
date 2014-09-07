@@ -63,6 +63,13 @@ class PostTestCase(HermesTestCase):
         expected = "/blog/2013/09/10/series-has-landed/"
         self.assertEqual(expected, self.post4.get_absolute_url())
 
+    def test_reading_time(self):
+        """A Post should know how long it would take a human to read it."""
+        expected = 20
+        self.post1.body = "test " * 6000
+        self.post1.save()
+        self.assertEqual(expected, self.post1.reading_time)
+
 
 class PostQuerySetTestCase(HermesTestCase):
     def test_reverse_creation_order(self):
@@ -132,3 +139,4 @@ class PostQuerySetTestCase(HermesTestCase):
         expected = [self.post3, ]
         self.assertEqual(
             expected, list(models.Post.objects.created_on(year=2012, month=8, day=10)))
+
