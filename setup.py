@@ -9,4 +9,5 @@ setup(
     url='https://github.com/bunchesofdonald/django-hermes',
     license='MIT',
     long_description=open('README.rst').read(),
+    description='A light-weight blogging app for Django.',
 )
