@@ -29,6 +29,15 @@ class PostTestCase(HermesTestCase):
 
         self.assertEqual(expected, self.post4.rendered)
 
+    def test_rendered_summary(self):
+        """A Post should be able to render its summary into HTML"""
+        self.post4.summary = "##Markdown FTW!"
+        self.post4.save()
+
+        expected = "<h2>Markdown FTW!</h2>"
+
+        self.assertEqual(expected, self.post4.rendered_summary)
+
     def test_rendereded_no_renderer(self):
         """A Post should return its body if no renderer is defined"""
         renderer = settings.MARKUP_RENDERER

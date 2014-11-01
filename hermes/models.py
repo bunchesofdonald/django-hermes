@@ -176,17 +176,18 @@ class Post(TimestampedModel):
 
     @property
     def rendered_summary(self):
-        if settings.MARKUP_RENDERER:
-            return settings.MARKUP_RENDERER(self.short)
-        else:
-            return self.short
+        return self._rendered_attribute('summary')
 
     @property
     def rendered(self):
+        return self._rendered_attribute('body')
+
+    def _rendered_attribute(self, attr_name):
+        attr_value = getattr(self, attr_name)
         if settings.MARKUP_RENDERER:
-            return settings.MARKUP_RENDERER(self.body)
+            return settings.MARKUP_RENDERER(attr_value)
         else:
-            return self.body
+            return attr_value
 
     @property
     def reading_time(self):
