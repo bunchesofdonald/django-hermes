@@ -169,7 +169,7 @@ class Post(TimestampedModel):
     @property
     def short(self):
         if self.summary:
-            return self.summary
+            return self.rendered_summary
         else:
             return Truncator(self.body).words(30)
 

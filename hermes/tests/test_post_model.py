@@ -12,10 +12,10 @@ class PostTestCase(HermesTestCase):
         )
         self.assertEqual(expected, self.post1.short)
 
-    def test_short_with_summary(self):
-        """A Post should return the summary if there is one"""
-        expected = u"This is a summary"
-        self.post1.summary = expected
+    def test_short_summary_rendered(self):
+        """Post.short should return the rendered summary"""
+        expected = u"<h1>This is a summary</h1>"
+        self.post1.summary = '#This is a summary'
         self.post1.save()
 
         self.assertEqual(expected, self.post1.short)
@@ -148,4 +148,3 @@ class PostQuerySetTestCase(HermesTestCase):
         expected = [self.post3, ]
         self.assertEqual(
             expected, list(models.Post.objects.created_on(year=2012, month=8, day=10)))
-
