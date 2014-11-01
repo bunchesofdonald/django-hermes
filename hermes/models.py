@@ -32,7 +32,7 @@ class CategoryManager(models.Manager):
 class Category(models.Model):
     title = models.CharField(_('title'), max_length=100)
     parent = models.ForeignKey('self', blank=True, null=True)
-    slug = models.CharField(blank=True, default='', max_length='500')
+    slug = models.CharField(blank=True, default='', max_length='500', db_index=True)
 
     objects = CategoryManager()
 
@@ -127,7 +127,7 @@ class PostManager(models.Manager):
         try:
             return getattr(self.__class__, attr, *args)
         except AttributeError:
-            return getattr(self.get_query_set(), attr, *args)
+            return getattr(self.get_queryset(), attr, *args)
 
 
 def post_hero_upload_to(instance, filename):
@@ -140,8 +140,7 @@ def post_hero_upload_to(instance, filename):
 
 
 class Post(TimestampedModel):
-    hero = models.ImageField(_('hero'), upload_to=post_hero_upload_to,
-                             blank=True)
+    hero = models.ImageField(_('hero'), upload_to=post_hero_upload_to, blank=True, null=True)
     subject = models.CharField(_('subject'), max_length=100)
     slug = models.SlugField(_('slug'), max_length=100)
     summary = models.TextField(_('summary'), blank=True, null=True)
