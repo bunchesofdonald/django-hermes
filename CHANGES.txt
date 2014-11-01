@@ -1,3 +1,5 @@
+v1.2.2, 2014-11-01 -- Minor changes to the way Post.short returns the summary /
+    body.
 v1.2.1, 2014-11-01 -- Add description to setup.py to keep it from showing as
     'UNKNOWN' on pypi.
 v1.2, 2014-11-01 -- Adds Post.rendered_summary and makes Post.hero an optional
