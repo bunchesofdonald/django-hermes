@@ -140,7 +140,8 @@ def post_hero_upload_to(instance, filename):
 
 
 class Post(TimestampedModel):
-    hero = models.ImageField(_('hero'), upload_to=post_hero_upload_to)
+    hero = models.ImageField(_('hero'), upload_to=post_hero_upload_to,
+                             blank=True)
     subject = models.CharField(_('subject'), max_length=100)
     slug = models.SlugField(_('slug'), max_length=100)
     summary = models.TextField(_('summary'), blank=True, null=True)
@@ -172,6 +173,13 @@ class Post(TimestampedModel):
             return self.summary
         else:
             return Truncator(self.body).words(30)
+
+    @property
+    def rendered_summary(self):
+        if settings.MARKUP_RENDERER:
+            return settings.MARKUP_RENDERER(self.short)
+        else:
+            return self.short
 
     @property
     def rendered(self):
