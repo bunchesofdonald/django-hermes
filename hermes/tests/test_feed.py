@@ -14,7 +14,7 @@ class LatestPostFeedTestCase(HermesTestCase):
 
         post_urls = [post['id'] for post in data['entries']]
         expected = [
-            "http://example.com{url}".format(url=post.get_absolute_url())
+            "http://testserver{url}".format(url=post.get_absolute_url())
             for post in models.Post.objects.all()
         ]
 

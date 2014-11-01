@@ -66,10 +66,10 @@ class PostTestCase(HermesTestCase):
 
     def test_get_absolute_url(self):
         """The Post should know its absolute URL"""
-        expected = "/blog/2010/06/10/leela-her-own/"
+        expected = "/2010/06/10/leela-her-own/"
         self.assertEqual(expected, self.post1.get_absolute_url())
 
-        expected = "/blog/2013/09/10/series-has-landed/"
+        expected = "/2013/09/10/series-has-landed/"
         self.assertEqual(expected, self.post4.get_absolute_url())
 
     def test_reading_time(self):

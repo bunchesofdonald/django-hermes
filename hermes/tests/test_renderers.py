@@ -20,5 +20,5 @@ class ReStructuredTextRendererTestCase(test.TestCase):
 class TextileRendererTestCase(test.TestCase):
     def test_render_to_html(self):
         """The Textile Renderer should be able to translate Textile to HTML"""
-        expected = "\t<p><em>Textile FTW!!</em></p>"
-        self.assertEqual(expected, renderers.textile("_Textile FTW!!_"))
+        expected = "\t<p><em>Textile</em></p>"
+        self.assertEqual(expected, renderers.textile("_Textile_"))

@@ -70,13 +70,13 @@ class CategoryTestCase(HermesTestCase):
 
     def test_get_absolute_url(self):
         """A Category should know its absolute URL"""
-        expected = u'/blog/categories/programming/'
+        expected = u'/categories/programming/'
         self.assertEqual(expected, self.root_category.get_absolute_url())
 
-        expected = u'/blog/categories/programming/python/'
+        expected = u'/categories/programming/python/'
         self.assertEqual(expected, self.second_category.get_absolute_url())
 
-        expected = u'/blog/categories/food/'
+        expected = u'/categories/food/'
         self.assertEqual(expected, self.another_category.get_absolute_url())
 
     def test_save(self):
