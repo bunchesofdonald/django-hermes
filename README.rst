@@ -1,3 +1,6 @@
+.. image:: https://travis-ci.org/bunchesofdonald/django-hermes.svg?branch=master
+    :target: https://travis-ci.org/bunchesofdonald/django-hermes
+
 =============
 django-hermes
 =============
