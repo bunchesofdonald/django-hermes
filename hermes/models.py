@@ -171,7 +171,7 @@ class Post(TimestampedModel):
         if self.summary:
             return self.rendered_summary
         else:
-            return Truncator(self.body).words(30)
+            return Truncator(self.rendered).words(settings.HERMES_SHORT_TRUNCATE_WORDS, html=True)
 
     @property
     def rendered_summary(self):
