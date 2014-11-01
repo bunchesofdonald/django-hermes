@@ -174,6 +174,13 @@ class Post(TimestampedModel):
             return Truncator(self.body).words(30)
 
     @property
+    def rendered_summary(self):
+        if settings.MARKUP_RENDERER:
+            return settings.MARKUP_RENDERER(self.short)
+        else:
+            return self.short
+
+    @property
     def rendered(self):
         if settings.MARKUP_RENDERER:
             return settings.MARKUP_RENDERER(self.body)
