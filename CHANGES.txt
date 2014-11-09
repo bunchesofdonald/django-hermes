@@ -1,3 +1,4 @@
+v1.3.0, 2014-11-09 -- Add support for Python 3.
 v1.2.2, 2014-11-01 -- Minor changes to the way Post.short returns the summary /
     body.
 v1.2.1, 2014-11-01 -- Add description to setup.py to keep it from showing as
