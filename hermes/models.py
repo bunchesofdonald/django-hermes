@@ -1,6 +1,10 @@
 import os
 import operator
-from six.moves import filter, reduce
+from functools import reduce
+try:
+    from itertools import ifilter as filter
+except:
+    pass  # Must be python 3
 
 from django.contrib.auth.models import User
 from django.db import models

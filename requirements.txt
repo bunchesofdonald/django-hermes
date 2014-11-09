@@ -7,4 +7,3 @@ pytz==2014.7
 regex==2014.10.24
 textile==2.2.1
 mkdocs==0.10
-six==1.8.0
