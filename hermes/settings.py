@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.utils.feedgenerator import Atom1Feed
 
-import renderers
+from . import renderers
 
 SYNDICATION_FEED_TITLE = getattr(settings, 'SYNDICATION_FEED_TITLE', '')
 SYNDICATION_FEED_LINK = getattr(settings, 'SYNDICATION_FEED_LINK', '/')
