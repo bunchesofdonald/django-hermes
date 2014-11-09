@@ -1,6 +1,8 @@
-*.pyc
-.DS_Store
-dist
+*,cover
 *.egg-info
+*.pyc
 *.sublime-project
 *.sublime-workspace
+.coverage
+.DS_Store
+dist
