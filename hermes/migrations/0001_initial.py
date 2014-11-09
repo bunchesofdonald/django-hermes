@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('title', models.CharField(max_length=100, verbose_name='title')),
-                ('slug', models.CharField(default=b'', max_length=b'500', blank=True)),
+                ('slug', models.CharField(default=b'', max_length=500, blank=True)),
                 ('parent', models.ForeignKey(blank=True, to='hermes.Category', null=True)),
             ],
             options={

@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='category',
             name='slug',
-            field=models.CharField(default=b'', max_length=b'500', db_index=True, blank=True),
+            field=models.CharField(default=b'', max_length=500, db_index=True, blank=True),
             preserve_default=True,
         ),
         migrations.AlterField(

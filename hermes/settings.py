@@ -1,8 +1,6 @@
 from django.conf import settings
 from django.utils.feedgenerator import Atom1Feed
 
-from . import renderers
-
 SYNDICATION_FEED_TITLE = getattr(settings, 'SYNDICATION_FEED_TITLE', '')
 SYNDICATION_FEED_LINK = getattr(settings, 'SYNDICATION_FEED_LINK', '/')
 SYNDICATION_FEED_DESCRIPTION = getattr(settings, 'SYNDICATION_FEED_DESCRIPTION', '')
@@ -12,6 +10,7 @@ HERMES_SHORT_TRUNCATE_WORDS = getattr(settings, 'HERMES_SHORT_TRUNCATE_WORDS', 3
 
 try:
     import markdown
+    from . import renderers
     MARKUP_RENDERER = getattr(settings, 'MARKUP_RENDERER', renderers.markdown)
 except:
     MARKUP_RENDERER = getattr(settings, 'MARKUP_RENDERER', None)

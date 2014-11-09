@@ -1,5 +1,6 @@
 import os
 import operator
+from six.moves import filter, reduce
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -22,7 +23,7 @@ class CategoryManager(models.Manager):
         if categories is None:
             categories = list(self.all())
 
-        children = filter(lambda c: c.parent == category, categories)
+        children = list(filter(lambda c: c.parent == category, categories))
         for child in children:
             children.extend(self.children_of(child, categories))
 
@@ -32,7 +33,7 @@ class CategoryManager(models.Manager):
 class Category(models.Model):
     title = models.CharField(_('title'), max_length=100)
     parent = models.ForeignKey('self', blank=True, null=True)
-    slug = models.CharField(blank=True, default='', max_length='500', db_index=True)
+    slug = models.CharField(blank=True, default='', max_length=500, db_index=True)
 
     objects = CategoryManager()
 
@@ -80,7 +81,7 @@ class Category(models.Model):
 
     def root_parent(self, category=None):
         """ Returns the topmost parent of the current category. """
-        return filter(lambda c: c.is_root, self.hierarchy())[0]
+        return next(filter(lambda c: c.is_root, self.hierarchy()))
 
 
 class PostQuerySet(models.query.QuerySet):
