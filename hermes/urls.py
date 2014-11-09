@@ -1,6 +1,12 @@
 from django.conf.urls import patterns, url
 
-from .views import ArchivePostListView, PostListView, PostDetail, CategoryPostListView
+from .views import (
+    ArchivePostListView,
+    AuthorPostListView,
+    CategoryPostListView,
+    PostDetail,
+    PostListView,
+)
 from .feeds import LatestPostFeed
 
 urlpatterns = patterns(
@@ -33,6 +39,12 @@ urlpatterns = patterns(
         regex=r'categories/(?P<slug>.+)/$',
         view=CategoryPostListView.as_view(),
         name='hermes_category_post_list',
+    ),
+
+    url(
+        regex=r'authors/(?P<author>.+)/$',
+        view=AuthorPostListView.as_view(),
+        name='hermes_author_post_list',
     ),
 
     url(

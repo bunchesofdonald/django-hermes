@@ -89,6 +89,9 @@ class Category(models.Model):
 
 
 class PostQuerySet(models.query.QuerySet):
+    def by(self, author):
+        return self.filter(author__username=author)
+
     def in_category(self, category_slug):
         category = Category.objects.get(slug=category_slug)
         children = Category.objects.children_of(category)

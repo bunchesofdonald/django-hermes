@@ -57,7 +57,7 @@
         "body": "Take me to your leader! Yeah, I do that with my stupidness. Yeah, and if you were the pope they'd be all, \"Straighten your pope hat.\" And \"Put on your good vestments.\" We don't have a brig. You're going back for the Countess, aren't you? I'm just glad my fat, ugly mama isn't alive to see this day.",
         "category": 1,
         "hero": "hermes/heroes/tale-two-santas_hero.jpeg",
-        "author": 1,
+        "author": 2,
         "summary": "",
         "created_on": "2011-07-10T15:55:31.082Z",
         "modified_on": "2011-07-10T15:55:31.082Z",
@@ -87,7 +87,7 @@
         "body": "Then throw her in the laundry room, which will hereafter be referred to as \"the brig\". And yet you haven't said what I told you to say! How can any of us trust you? Quite possible. We live long and are celebrated poopers. Soothe us with sweet lies.",
         "category": 4,
         "hero": "hermes/heroes/series-has-landed_hero.jpg",
-        "author": 1,
+        "author": 2,
         "summary": "",
         "created_on": "2013-09-10T15:56:11.384Z",
         "modified_on": "2013-09-10T15:56:11.384Z",
@@ -99,7 +99,7 @@
     "pk": 1,
     "model": "auth.user",
     "fields": {
-        "username": "user",
+        "username": "author1",
         "first_name": "Test",
         "last_name": "User",
         "is_active": true,
@@ -111,6 +111,24 @@
         "password": "pbkdf2_sha256$12000$lxpwgLEsqIWK$HPF0M2vuPrx8lKFop2MCrZrdncRPChaTe1Qfy0dl7Qc=",
         "email": "test.user@example.com",
         "date_joined": "2013-08-10T15:35:19Z"
+    }
+},
+{
+    "pk": 2,
+    "model": "auth.user",
+    "fields": {
+        "username": "author2",
+        "first_name": "Test",
+        "last_name": "User2",
+        "is_active": true,
+        "is_superuser": false,
+        "is_staff": false,
+        "last_login": "2013-10-09T02:39:03.670Z",
+        "groups": [],
+        "user_permissions": [],
+        "password": "pbkdf2_sha256$12000$lxpwgLEsqIWK$HPF0M2vuPrx8lKFop2MCrZrdncRPChaTe1Qfy0dl7Qc=",
+        "email": "test.user2@example.com",
+        "date_joined": "2013-08-11T15:35:19Z"
     }
 }
 ]

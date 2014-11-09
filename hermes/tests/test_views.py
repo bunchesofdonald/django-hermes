@@ -65,6 +65,19 @@ class ArchivePostListViewTestCase(HermesTestCase):
         self.assertEqual(expected, list(response.context['posts']))
 
 
+class AuthorPostListViewTestCase(HermesTestCase):
+    def url(self, author):
+        return super(AuthorPostListViewTestCase, self).url('hermes_author_post_list', author)
+
+    def test_context_contains_posts(self):
+        """The AuthorPoustListView Context should cotain a QuerySet af all
+        Posts by the given Author.
+        """
+        expected = list(models.Post.objects.by('author1'))
+        response = self.get(self.url('author1'))
+        self.assertEqual(expected, list(response.context['posts']))
+
+
 class PostDetailViewTestCase(HermesTestCase):
     def url(self, post):
         return post.get_absolute_url()

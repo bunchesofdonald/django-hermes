@@ -80,8 +80,20 @@ class PostTestCase(HermesTestCase):
         self.post1.save()
         self.assertEqual(expected, self.post1.reading_time)
 
+    def test_reading_time_very_short(self):
+        """A Post should never think its reading time is less than a minute"""
+        expected = 1
+        self.post1.body = ""
+        self.post1.save()
+        self.assertEqual(expected, self.post1.reading_time)
+
 
 class PostQuerySetTestCase(HermesTestCase):
+    def test_by(self):
+        """The Post QuerySet should return Posts by a specific author"""
+        expected = [self.post3, self.post1, ]
+        self.assertEqual(expected, list(models.Post.objects.by('author1')))
+
     def test_reverse_creation_order(self):
         """The Post QuerySet should return Posts in reverse creation order"""
         expected = [self.post4, self.post3, self.post2, self.post1, ]
