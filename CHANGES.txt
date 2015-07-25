@@ -1,3 +1,6 @@
+AuthorPostListView
+
+v1.3.2, 2015-07-25 -- Add Django 1.8 to travis.yml
 v1.3.1, 2014-11-09 -- Add trove classifiers to setup.py.
 v1.3.0, 2014-11-09 -- Add support for Python 3.
 v1.2.2, 2014-11-01 -- Minor changes to the way Post.short returns the summary /
