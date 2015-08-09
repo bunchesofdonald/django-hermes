@@ -9,6 +9,9 @@ class PostListView(ListView):
     model = Post
     template_name = 'hermes/post_list.html'
 
+    def get_queryset(self):
+        return self.model.objects.published()
+
 
 class CategoryPostListView(PostListView):
     """Displays posts from a specific Category"""
