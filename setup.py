@@ -22,5 +22,5 @@ setup(
     name='django-hermes',
     packages=find_packages(),
     url='https://github.com/bunchesofdonald/django-hermes',
-    version='1.3.1',
+    version='1.4.0',
 )
