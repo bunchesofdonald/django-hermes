@@ -9,7 +9,7 @@ class PostListViewTestCase(HermesTestCase):
     def test_context_contains_posts(self):
         """The PostListView Context should contain a QuerySet of all Posts"""
         response = self.get(self.url())
-        expected = list(models.Post.objects.all())
+        expected = list(models.Post.objects.published())
         self.assertEqual(expected, list(response.context['posts']))
 
 
