@@ -116,13 +116,13 @@ class PostQuerySetTestCase(HermesTestCase):
         self.assertEqual(expected, list(models.Post.objects.in_category('programming/python')))
 
     def test_recent(self):
-        """The PostQuerySet recent method should return the most recent Posts up to 'limit'"""
-        expected = [self.post4, self.post3, ]
+        """The PostQuerySet recent method should return the most recent published Posts up to 'limit'"""
+        expected = [self.post4, self.post2, ]
         self.assertEqual(expected, list(models.Post.objects.recent(limit=2)))
 
     def test_recent_no_limit(self):
-        """The PostQuerySet recent method should return all the Posts if no limit is set"""
-        expected = [self.post4, self.post3, self.post2, self.post1, ]
+        """The PostQuerySet recent method should return all the published Posts if no limit is set"""
+        expected = [self.post4, self.post2, self.post1, ]
         self.assertEqual(expected, list(models.Post.objects.recent(limit=None)))
 
     def test_random(self):
@@ -161,3 +161,8 @@ class PostQuerySetTestCase(HermesTestCase):
         expected = [self.post3, ]
         self.assertEqual(
             expected, list(models.Post.objects.created_on(year=2012, month=8, day=10)))
+
+    def test_published(self):
+        """The PostQuerySet should know what Posts are published"""
+        expected = [self.post4, self.post2, self.post1, ]
+        self.assertEqual(expected, list(models.Post.objects.published()))

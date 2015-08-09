@@ -113,7 +113,7 @@ class PostQuerySet(models.query.QuerySet):
         return self.filter(reduce(operator.__and__, clauses))
 
     def recent(self, limit=None):
-        queryset = self.all()
+        queryset = self.published()
         if limit:
             queryset = queryset[:limit]
 
@@ -125,6 +125,9 @@ class PostQuerySet(models.query.QuerySet):
             queryset = queryset[:limit]
 
         return queryset
+
+    def published(self):
+        return self.filter(is_published=True)
 
 
 class PostManager(models.Manager):
@@ -148,6 +151,7 @@ def post_hero_upload_to(instance, filename):
 
 
 class Post(TimestampedModel):
+    is_published = models.BooleanField(default=False)
     hero = models.ImageField(_('hero'), upload_to=post_hero_upload_to, blank=True, null=True)
     subject = models.CharField(_('subject'), max_length=100)
     slug = models.SlugField(_('slug'), max_length=100)
