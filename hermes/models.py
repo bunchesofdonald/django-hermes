@@ -6,7 +6,7 @@ try:
 except:
     pass  # Must be python 3
 
-from django.contrib.auth.models import User
+from django.conf import settings as django_settings
 from django.db import models
 from django.utils.text import Truncator, slugify
 from django.utils.translation import ugettext as _
@@ -162,7 +162,7 @@ class Post(TimestampedModel):
     body = models.TextField(_('body'))
 
     category = models.ForeignKey(Category)
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(django_settings.AUTH_USER_MODEL)
 
     objects = PostManager()
 
