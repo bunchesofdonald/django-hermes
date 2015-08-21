@@ -26,6 +26,9 @@ In your django settings file, add hermes to your INSTALLED_APPS::
         ...
     )
 
+If you want to create your blog templates in a specific app directory (other than hermes), make sure that that app comes before hermes in your INSTALLED_APPS. Otherwise, Django will render the templates that are in the hermes app itself and not yours.
+
+
 Setup URLs
 ----------
 Include hermes.urls in your ROOT_URLCONF::
