@@ -10,6 +10,8 @@ from django.conf import settings as django_settings
 from django.db import models
 from django.utils.text import Truncator, slugify
 from django.utils.translation import ugettext as _
+from django.db.models.signals import pre_delete
+from django.dispatch.dispatcher import receiver
 
 from . import settings
 
@@ -135,13 +137,26 @@ class PostQuerySet(models.query.QuerySet):
 
 class PostManager(models.Manager):
     def get_queryset(self):
-        return PostQuerySet(Post)
+        return PostQuerySet(self.model, using=self._db)
 
-    def __getattr__(self, attr, *args):
-        try:
-            return getattr(self.__class__, attr, *args)
-        except AttributeError:
-            return getattr(self.get_queryset(), attr, *args)
+    def in_category(self, category_slug):
+        return self.get_queryset().in_category(category_slug)
+
+    def created_on(self, year=None, month=None, day=None):
+        return self.get_queryset().created_on(year=year, month=month, day=day)
+
+    def recent(self, limit=None):
+        return self.get_queryset().recent(limit=limit)
+
+    def random(self, limit=None):
+        return self.get_queryset().random(limit=limit)
+
+    def published(self):
+        return self.get_queryset().published()
+
+    def by(self, author):
+        return self.get_queryset().by(author)
+
 
 
 def post_hero_upload_to(instance, filename):
@@ -212,3 +227,30 @@ class Post(TimestampedModel):
         if time == 0:
             time = 1
         return time
+
+
+def postfile_upload_to(instance, filename):
+    return "uploads/hermes/{article}/{filename}".format(
+        article=instance.pk,
+        filename=filename
+    )
+
+
+class PostFile(models.Model):
+    post = models.ForeignKey(Post, related_name='files')
+    f = models.FileField(upload_to=postfile_upload_to)
+
+    class Meta:
+        verbose_name = "PostFile"
+        verbose_name_plural = "PostFiles"
+
+    def __unicode__(self):
+        return u'File for {}'.format(self.post)
+
+    def __str__(self):
+        return self.__unicode__()
+
+
+@receiver(pre_delete, sender=PostFile)
+def postfile_delete(sender, instance, **kwargs):
+    instance.f.delete(False)

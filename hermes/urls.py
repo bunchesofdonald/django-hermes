@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
 from .views import (
     ArchivePostListView,
@@ -9,8 +9,7 @@ from .views import (
 )
 from .feeds import LatestPostFeed
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(
         regex=r'^(?P<year>\d+)/(?P<month>\d+)/(?P<day>\d+)/(?P<slug>[\w-]+)/$',
         view=PostDetail.as_view(),
@@ -57,4 +56,4 @@ urlpatterns = patterns(
         view=LatestPostFeed(),
         name='hermes_post_feed'
     ),
-)
+]
