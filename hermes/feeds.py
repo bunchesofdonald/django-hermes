@@ -20,7 +20,7 @@ class LatestPostFeed(Feed):
         return item.subject
 
     def item_description(self, item):
-        return item.short
+        return item.rendered
 
     def item_pubdate(self, item):
         return item.created_on
