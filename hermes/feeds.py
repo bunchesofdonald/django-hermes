@@ -1,4 +1,5 @@
 from django.contrib.syndication.views import Feed
+from django.utils.safestring import mark_safe
 
 from .models import Post
 from .settings import (
@@ -20,7 +21,7 @@ class LatestPostFeed(Feed):
         return item.subject
 
     def item_description(self, item):
-        return item.rendered
+        return mark_safe(item.rendered)
 
     def item_pubdate(self, item):
         return item.created_on
