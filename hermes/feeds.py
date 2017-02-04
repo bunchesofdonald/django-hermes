@@ -12,6 +12,7 @@ class LatestPostFeed(Feed):
     link = SYNDICATION_FEED_LINK
     description = SYNDICATION_FEED_DESCRIPTION
     feed_type = SYNDICATION_FEED_TYPE
+    description_template = 'feed_post_description.html
 
     def items(self):
         return Post.objects.recent()
