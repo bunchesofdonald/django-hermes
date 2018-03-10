@@ -183,6 +183,7 @@ class Post(TimestampedModel):
 
     class Meta:
         ordering = ('-created_on', )
+        get_latest_by = 'modified_on'
 
     def __unicode__(self):
         return self.subject
