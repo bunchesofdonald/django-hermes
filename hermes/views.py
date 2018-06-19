@@ -1,8 +1,27 @@
+import hashlib
+
+from django.views.decorators.http import condition
 from django.views.generic import ListView, DetailView
+from django.utils.decorators import method_decorator
 
 from .models import Post
 
 
+def latest_post(request, *args, **kwargs):
+    return Post.objects.latest().modified_on
+
+
+def get_etag(request, *args, **kwargs):
+    post_modified_on = str(latest_post(request, *args, **kwargs))
+    return hashlib.md5(
+        "-".join(('blog', post_modified_on)).encode('utf-8')
+    ).hexdigest()
+
+
+@method_decorator(
+    condition(last_modified_func=latest_post, etag_func=get_etag),
+    name='get'
+)
 class PostListView(ListView):
     """Base Post List View."""
     context_object_name = 'posts'
