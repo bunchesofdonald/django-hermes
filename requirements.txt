@@ -1,4 +1,4 @@
-Django>=1.6.5
+Django>=1.11
 Markdown==2.5.1
 Pillow==2.6.1
 docutils==0.12
@@ -7,3 +7,4 @@ pytz==2014.7
 regex==2014.10.24
 textile==2.2.1
 mkdocs==0.10
+django-markdown-deux==1.0.5
