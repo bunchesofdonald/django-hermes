@@ -1,5 +1,5 @@
-.. image:: https://travis-ci.org/bunchesofdonald/django-hermes.svg?branch=master
-    :target: https://travis-ci.org/bunchesofdonald/django-hermes
+.. image:: https://travis-ci.org/DemocracyClub/django-hermes.svg?branch=master
+    :target: https://travis-ci.org/DemocracyClub/django-hermes
 
 =============
 django-hermes
