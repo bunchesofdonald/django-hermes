@@ -1,5 +1,5 @@
 from django import test
-from django.core import urlresolvers
+from django.urls import reverse
 from django.contrib import auth
 
 
@@ -25,7 +25,7 @@ class HermesTestCase(test.TestCase):
         self.client = test.Client()
 
     def url(self, url_name, *args, **kwargs):
-        return urlresolvers.reverse(url_name, args=args, kwargs=kwargs)
+        return reverse(url_name, args=args, kwargs=kwargs)
 
     def get(self, url):
         return self.client.get(url)
