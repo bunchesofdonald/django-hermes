@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('title', models.CharField(max_length=100, verbose_name='title')),
                 ('slug', models.CharField(default=b'', max_length=500, blank=True)),
-                ('parent', models.ForeignKey(blank=True, to='hermes.Category', null=True)),
+                ('parent', models.ForeignKey(blank=True, to='hermes.Category', null=True, on_delete=models.CASCADE)),
             ],
             options={
                 'verbose_name': 'category',
@@ -38,8 +38,8 @@ class Migration(migrations.Migration):
                 ('slug', models.SlugField(max_length=100, verbose_name='slug')),
                 ('summary', models.TextField(null=True, verbose_name='summary', blank=True)),
                 ('body', models.TextField(verbose_name='body')),
-                ('author', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
-                ('category', models.ForeignKey(to='hermes.Category')),
+                ('author', models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
+                ('category', models.ForeignKey(to='hermes.Category', on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ('-created_on',),

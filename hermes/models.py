@@ -8,6 +8,7 @@ except:
 
 from django.conf import settings as django_settings
 from django.db import models
+from django.urls import reverse
 from django.utils.text import Truncator, slugify
 from django.utils.translation import ugettext as _
 from django.db.models.signals import pre_delete
@@ -38,7 +39,7 @@ class CategoryManager(models.Manager):
 
 class Category(models.Model):
     title = models.CharField(_('title'), max_length=100)
-    parent = models.ForeignKey('self', blank=True, null=True)
+    parent = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE)
     slug = models.CharField(blank=True, default='', max_length=500, db_index=True)
 
     objects = CategoryManager()
@@ -57,11 +58,8 @@ class Category(models.Model):
     def __str__(self):
         return self.__unicode__()
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('hermes_category_post_list', (), {
-            'slug': self.slug,
-        })
+        return reverse('hermes_category_post_list', kwargs={'slug': self.slug})
 
     def _generate_slug(self):
         return "/".join([slugify(category.title) for category in self.hierarchy()]).lower()
@@ -176,8 +174,8 @@ class Post(TimestampedModel):
     summary = models.TextField(_('summary'), blank=True, null=True)
     body = models.TextField(_('body'))
 
-    category = models.ForeignKey(Category)
-    author = models.ForeignKey(django_settings.AUTH_USER_MODEL)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    author = models.ForeignKey(django_settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     objects = PostManager()
 
@@ -191,9 +189,8 @@ class Post(TimestampedModel):
     def __str__(self):
         return self.__unicode__()
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('hermes_post_detail', (), {
+        return reverse('hermes_post_detail', kwargs={
             'year': self.created_on.year,
             'month': self.created_on.strftime('%m'),
             'day': self.created_on.strftime('%d'),
@@ -205,7 +202,13 @@ class Post(TimestampedModel):
         if self.summary:
             return self.rendered_summary
         else:
-            return Truncator(self.rendered).words(settings.HERMES_SHORT_TRUNCATE_WORDS, html=True)
+            return Truncator(
+                self.rendered
+            ).words(
+                settings.HERMES_SHORT_TRUNCATE_WORDS,
+                truncate='…',
+                html=True,
+            )
 
     @property
     def rendered_summary(self):
@@ -238,7 +241,7 @@ def postfile_upload_to(instance, filename):
 
 
 class PostFile(models.Model):
-    post = models.ForeignKey(Post, related_name='files')
+    post = models.ForeignKey(Post, related_name='files', on_delete=models.CASCADE)
     f = models.FileField(upload_to=postfile_upload_to)
 
     class Meta:

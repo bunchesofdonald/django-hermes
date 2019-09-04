@@ -8,7 +8,7 @@ class PostTestCase(HermesTestCase):
         expected = (
             u"<p>I've got to find a way to escape the horrible ravages of youth. "
             u"Suddenly, I'm going to the bathroom like clockwork, every three "
-            u"hours. And those jerks at...</p>"
+            u"hours. And those jerks at Social Security…</p>"
         )
 
         self.assertEqual(expected, self.post1.short)
