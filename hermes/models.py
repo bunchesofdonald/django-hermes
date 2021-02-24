@@ -158,10 +158,13 @@ class PostManager(models.Manager):
 
 
 def post_hero_upload_to(instance, filename):
-    extension = os.path.splitext(filename)[1][1:]
+    filename = os.path.split(filename)[-1]
+    filename, extension = os.path.splitext(filename)
+    extension = extension[1:]
 
-    return "hermes/heroes/{slug}_hero.{extension}".format(
+    return "hermes/heroes/{slug}_{filename}_hero.{extension}".format(
         slug=instance.slug,
+        filename=filename,
         extension=extension
     )
 
