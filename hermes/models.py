@@ -163,8 +163,8 @@ def post_hero_upload_to(instance, filename):
     extension = extension[1:]
 
     return "hermes/heroes/{slug}_{filename}_hero.{extension}".format(
-        slug=instance.slug,
-        filename=filename,
+        slug=instance.slug[:40],
+        filename=filename[:30],
         extension=extension
     )
 
