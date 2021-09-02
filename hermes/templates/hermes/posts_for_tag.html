@@ -1,0 +1,21 @@
+{% load thumbnail %}
+{% if posts %}
+<h2>On the blog</h2>
+<ul class="post-list ds-grid">
+{% for post in posts %}
+<li class="ds-card">
+  {% if post.hero %}
+  {% thumbnail post.hero "690" as im %}
+  <div class="ds-card-image"><img src="{{ im.url }}"></div>
+  {% endthumbnail %}
+  {% endif %}
+  <div class="ds-card-body">
+    <h3><a class="ds-card-link ds-h5" href="#">{{ post.subject }}</a></h3>
+    <p>
+      {{ post.summary }}
+    </p>
+  </div>
+</li>
+{% endfor %}
+</ul>
+{% endif %}

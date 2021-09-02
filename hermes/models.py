@@ -1,6 +1,9 @@
 import os
 import operator
 from functools import reduce
+
+from django.contrib.postgres.fields import ArrayField
+
 try:
     from itertools import ifilter as filter
 except:
@@ -155,6 +158,9 @@ class PostManager(models.Manager):
     def by(self, author):
         return self.get_queryset().by(author)
 
+    def for_tag(self, tag):
+        return self.filter(tags__contains=[tag])
+
 
 
 def post_hero_upload_to(instance, filename):
@@ -179,6 +185,7 @@ class Post(TimestampedModel):
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     author = models.ForeignKey(django_settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    tags = ArrayField(models.CharField(max_length=30), blank=True)
 
     objects = PostManager()
 
