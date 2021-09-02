@@ -29,7 +29,11 @@ class PostListView(ListView):
     template_name = 'hermes/post_list.html'
 
     def get_queryset(self):
-        return self.model.objects.published()
+        qs = self.model.objects.published()
+        tag = self.request.GET.get("tag", None)
+        if tag:
+            qs = qs.for_tag(tag)
+        return qs
 
 
 class CategoryPostListView(PostListView):

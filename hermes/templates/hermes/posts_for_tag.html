@@ -1,4 +1,5 @@
 {% load thumbnail %}
+{% load typogrify_tags %}
 {% if posts %}
 <h2>On the blog</h2>
 <ul class="post-list ds-grid">
@@ -12,10 +13,11 @@
   <div class="ds-card-body">
     <h3><a class="ds-card-link ds-h5" href="#">{{ post.subject }}</a></h3>
     <p>
-      {{ post.summary }}
+      {{ post.rendered_summary|safe|typogrify }}
     </p>
   </div>
 </li>
 {% endfor %}
 </ul>
+<a href="{% url "hermes_post_list" %}?tag={{tag}}" class="ds-cta">More posts</a>
 {% endif %}

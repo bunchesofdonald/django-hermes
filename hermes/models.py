@@ -135,6 +135,9 @@ class PostQuerySet(models.query.QuerySet):
     def published(self):
         return self.filter(is_published=True)
 
+    def for_tag(self, tag):
+        return self.filter(tags__contains=[tag])
+
 
 class PostManager(models.Manager):
     def get_queryset(self):
@@ -159,7 +162,7 @@ class PostManager(models.Manager):
         return self.get_queryset().by(author)
 
     def for_tag(self, tag):
-        return self.filter(tags__contains=[tag])
+        return self.get_queryset().for_tag(tag)
 
 
 
