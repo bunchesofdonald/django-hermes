@@ -15,7 +15,7 @@ class LatestPostFeed(Feed):
     description_template = 'hermes/feed_post_description.html'
 
     def items(self):
-        return Post.objects.recent()
+        return Post.objects.recent(limit=5)
 
     def item_title(self, item):
         return item.subject
