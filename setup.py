@@ -21,6 +21,7 @@ setup(
     long_description=open('README.rst').read(),
     name='django-hermes',
     packages=find_packages(),
+    include_package_data=True,
     url='https://github.com/bunchesofdonald/django-hermes',
-    version='1.5.5',
+    version='1.5.6',
 )
