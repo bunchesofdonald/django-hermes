@@ -2,3 +2,4 @@ include LICENSE.txt
 include CHANGES.txt
 include *.rst
 recursive-include docs *.txt
+recursive-include hermes/templates *.html
